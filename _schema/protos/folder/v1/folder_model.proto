@@ -2,9 +2,13 @@ syntax = "proto3";
 
 option go_package = "product/api/go-sdk/folder/v1;folderV1";
 
+import "sqlc/v1/options.proto";
+
 package folder.v1;
 
 message Folder {
+  option(sqlc.v1.sqlc_entity) = "folder";
+
   string id = 1;
   string name = 2;
 }

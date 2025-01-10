@@ -9,6 +9,10 @@ plugins:
   - remote: buf.build/connectrpc/go
     out: ../api/go-sdk
     opt: paths=source_relative
+  - local: protoc-gen-sqlc
+    out: ../backend-connect-go
+    opt: paths=source_relative
 
 inputs:
   - directory: protos
+  - directory: third_party
