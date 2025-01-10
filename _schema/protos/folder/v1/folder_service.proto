@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+option go_package = "product/api/go-sdk/folder/v1;folderV1";
+
+import "folder/v1/folder_model.proto";
+
+package folder.v1;
+
+service FolderService {
+  // mutations - create, update, delete
+  rpc CreateFolder(CreateFolderRequest) returns (CreateFolderResponse) {}
+  rpc UpdateFolder(UpdateFolderRequest) returns (UpdateFolderResponse) {}
+  rpc DeleteFolder(DeleteFolderRequest) returns (DeleteFolderResponse) {}
+  // queries - get, list
+  rpc GetFolder(GetFolderRequest) returns (GetFolderResponse) {}
+  rpc ListFolders(ListFoldersRequest) returns (ListFoldersResponse) {}
+}
+
+message CreateFolderRequest {
+  string name = 1;
+}
+
+message CreateFolderResponse {
+  Folder folder = 1;
+}
+
+message UpdateFolderRequest {
+  string id = 1;
+  string name = 2;
+}
+
+message UpdateFolderResponse {
+  Folder folder = 1;
+}
+
+message DeleteFolderRequest {
+  string id = 1;
+}
+
+message DeleteFolderResponse {
+  Folder folder = 1;
+}
+
+message GetFolderRequest {
+  string id = 1;
+}
+
+message GetFolderResponse {
+  Folder folder = 1;
+}
+
+message ListFoldersRequest {
+  int32 page_limit = 1;
+  int32 page_offset = 2;
+}
+
+message ListFoldersResponse {
+  repeated Folder folders = 1;
+  int32 total_count = 2;
+  int32 next_page_offset = 3;
+  bool has_more = 4;
+}
