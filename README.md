@@ -19,8 +19,16 @@ make monitoring
 
 ### codegen
 
+- build protobuf-gen locally
+
 ```bash
-make scheme-codegen
+make build-protobuf-gen-image
+```
+
+- generate code
+
+```bash
+make local-schema-codegen
 ```
 
 ## flow
