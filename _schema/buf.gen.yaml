@@ -10,7 +10,7 @@ plugins:
     out: ../api/go-sdk
     opt: paths=source_relative
   - local: protoc-gen-sqlc
-    out: ../backend-connect-go
+    out: ../product/backend-connect-go
     opt: paths=source_relative
 
 inputs:
