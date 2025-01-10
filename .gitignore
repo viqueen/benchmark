@@ -2,3 +2,4 @@
 *.iml
 
 .env
+.local-env/

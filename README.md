@@ -8,14 +8,20 @@
 
 ## setup
 
-### observability
+### environment
 
 ```bash
-make monitoring
+make start-monitoring
 ```
 
 - open grafana [http://localhost:3000](http://localhost:3000)
 - open prometheus [http://localhost:9090](http://localhost:9090)
+
+```bash
+make start-stack
+```
+
+- comes with postgres
 
 ### codegen
 
