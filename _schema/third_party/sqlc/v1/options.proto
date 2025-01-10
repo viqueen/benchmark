@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "api/go-sdk/folder/v1;folderV1";
+option go_package = "api/go-sdk/sqlc/v1;sqlcV1";
 
 package sqlc.v1;
 

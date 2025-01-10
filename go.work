@@ -1,6 +1,7 @@
 go 1.23.3
 
 use (
+	./_shared/go-sdk
 	./api/go-sdk
 	./product/backend-connect-go
 )

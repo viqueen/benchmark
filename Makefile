@@ -23,7 +23,7 @@ build-protobuf-gen-image:
 	@echo "Building protobuf-gen image..."
 	@docker build -t protobuf-gen _tools/docker-images/protobuf-gen
 
-.PHONY: local-schema-codgen
+.PHONY: local-go-codgen
 local-go-codegen:
 	@echo "Generating code from schema..."
 	@docker run --rm \
@@ -52,14 +52,7 @@ local-go-codegen:
             -locations=filesystem:/flyway/backend/data/schema \
             migrate info
 
-.PHONY: go-codegen
-go-codegen:
-	@echo "Generating code from schema..."
-	@docker run --rm \
-		--volume $(PWD)/_schema:/workspace/schema \
-		--volume $(PWD)/api:/workspace/api \
-		--volume $(PWD)/product:/workspace/product \
-		--volume $(PWD)/_schema/buf.gen.go.yaml:/workspace/schema/buf.gen.yaml \
-		--workdir /workspace/schema \
-		ghcr.io/viqueen/benchmark-protobuf-gen:main generate --config buf.gen.go.yaml --verbose
-
+.PHONY: start-connect-go
+start-connect-go:
+	@echo "Starting backend-connect-go..."
+	cd product/backend-connect-go && go run cmd/server/main.go

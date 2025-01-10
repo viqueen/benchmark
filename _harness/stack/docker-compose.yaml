@@ -13,7 +13,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - "../.local-env/stack/postgres:/var/lib/postgresql/data"
+      - "../../.local-env/stack/postgres:/var/lib/postgresql/data"
     networks:
       - "benchmark_stack"
 

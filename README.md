@@ -6,6 +6,14 @@
 - Docker Compose
 - Make
 
+## stack
+
+- **database**: postgres
+- **observability**: prometheus, grafana
+- **golang**: connect-rpc , grpc-go (WIP)
+- **java**: grpc-java (WIP) , spring-boot (WIP)
+- **nodejs**: grpc-nodejs (WIP) , express (WIP)
+
 ## setup
 
 ### environment
@@ -21,20 +29,28 @@ make start-monitoring
 make start-stack
 ```
 
-- comes with postgres
-
-### codegen
-
-- build protobuf-gen locally
 
 ```bash
 make build-protobuf-gen-image
 ```
 
+
+### Go - connect-rpc
+
+- explore the plugins in use
+  - [viqueen/protoc-gen-connect-go-backend](https://github.com/viqueen/protoc-gen-connect-go-backend)
+  - [viqueen/protoc-gen-sqlc](https://github.com/viqueen/protoc-gen-sqlc)
+
 - generate code
 
 ```bash
-make local-schema-codegen
+make local-go-codegen
+```
+
+- start the server
+
+```bash
+make start-connect-go
 ```
 
 ## flow
