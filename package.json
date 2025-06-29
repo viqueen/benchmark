@@ -3,8 +3,14 @@
   "version": "1.0.0",
   "author": "Hasnae R. <>",
   "license": "Apache-2.0",
+  "scripts": {
+    "claude": "claude"
+  },
   "workspaces": [
     "load-tests/*",
     "packages/*"
-  ]
+  ],
+  "devDependencies": {
+    "@anthropic-ai/claude-code": "^1.0.35"
+  }
 }

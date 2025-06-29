@@ -2,3 +2,5 @@
 *.iml
 
 api/go-sdk/**/*.go
+
+node_modules/
