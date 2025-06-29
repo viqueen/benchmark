@@ -1,0 +1,17 @@
+services:
+  api:
+    build:
+      context: ../packages/${NAME}
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+
+  e2e_tests:
+    image: golang:1.23.6-alpine
+    volumes:
+      - .:/go/src/e2e-tests
+      - ../api:/go/src/api
+    working_dir: /go/src/e2e-tests
+    command: go test ./...
+    environment:
+      - API_BASE_URL=http://api:8080
