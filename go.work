@@ -1,3 +1,6 @@
 go 1.23.6
 
-use ./api/go-sdk
+use (
+	./api/go-sdk
+	./e2e-tests
+)
