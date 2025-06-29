@@ -1,0 +1,74 @@
+version: '3.8'
+
+networks:
+  load-tests:
+    driver: bridge
+    name: load-tests-network
+
+services:
+  influxdb:
+    image: influxdb:1.8
+    container_name: influxdb
+    ports:
+      - "8086:8086"
+    networks:
+      - load-tests
+    environment:
+      - INFLUXDB_DB=k6
+      - INFLUXDB_USER=k6
+      - INFLUXDB_USER_PASSWORD=k6
+    volumes:
+      - ./.local/influxdb:/var/lib/influxdb
+    profiles:
+      - monitoring
+      - test
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    networks:
+      - load-tests
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - ./.local/grafana:/var/lib/grafana
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources
+    depends_on:
+      - influxdb
+    profiles:
+      - monitoring
+
+  api:
+    build:
+      context: ../packages/${NAME}
+      dockerfile: Dockerfile
+    container_name: benchmark-api
+    ports:
+      - "8080:8080"
+    networks:
+      - load-tests
+    environment:
+      - PORT=8080
+    profiles:
+      - test
+
+  k6:
+    image: grafana/k6:latest
+    container_name: k6
+    command: run --out influxdb=http://influxdb:8086/k6 /tests/content-api.js
+    volumes:
+      - ./tests:/tests
+    networks:
+      - load-tests
+    environment:
+      - API_BASE_URL=http://api:8080
+      - K6_INFLUXDB_ADDR=http://influxdb:8086
+      - K6_INFLUXDB_DB=k6
+    depends_on:
+      - api
+      - influxdb
+    profiles:
+      - test

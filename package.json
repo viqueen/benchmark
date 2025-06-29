@@ -4,7 +4,8 @@
   "author": "Hasnae R. <>",
   "license": "Apache-2.0",
   "scripts": {
-    "claude": "claude"
+    "claude": "claude",
+    "k6": "npm run --workspace @labset/benchmark-load-tests"
   },
   "workspaces": [
     "load-tests/*",

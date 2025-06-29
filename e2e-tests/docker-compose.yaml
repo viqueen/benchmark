@@ -5,6 +5,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
+    volumes:
+      - .:/go/src
 
   e2e_tests:
     image: golang:1.23.6-alpine

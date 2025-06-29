@@ -2,5 +2,10 @@
   "name": "@labset/benchmark-load-tests",
   "version": "1.0.0",
   "description": "k6 load tests for Labset Benchmark with Grafana visualization",
-  "scripts": {}
+  "scripts": {
+    "test": "docker run --rm -v $(pwd)/tests:/tests grafana/k6 run /tests/content-api.js",
+    "test:smoke": "docker run --rm -v $(pwd)/tests:/tests grafana/k6 run --vus 1 --duration 30s /tests/content-api.js",
+    "test:load": "docker run --rm -v $(pwd)/tests:/tests grafana/k6 run --vus 10 --duration 5m /tests/content-api.js",
+    "test:stress": "docker run --rm -v $(pwd)/tests:/tests grafana/k6 run --vus 50 --duration 10m /tests/content-api.js"
+  }
 }
