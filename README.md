@@ -41,3 +41,21 @@ make e2e-tests NAME=node-basic
 ```bash
 make e2e-tests NAME=java-basic
 ```
+
+### load tests
+
+The following command runs all load tests defined in the `load-tests` directory against a given implementation that is available in the `packages/` directory.
+
+It expects the API server to be running on port `8080` by default.
+
+#### monitoring stack
+
+```bash
+make start-monitoring
+```
+
+#### golang
+
+```bash
+make load-tests NAME=go-basic
+```
