@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+option go_package = "api/go-sdk/content/v1;contentV1";
+
+import "content/v1/content_model.proto";
+
+package content.v1;
+
+service ContentService {
+  rpc CreateContent(CreateContentRequest) returns (CreateContentResponse);
+  rpc UpdateContent(UpdateContentRequest) returns (UpdateContentResponse);
+  rpc DeleteContent(DeleteContentRequest) returns (DeleteContentResponse);
+  rpc GetContent(GetContentRequest) returns (GetContentResponse);
+  rpc ListContents(ListContentsRequest) returns (ListContentsResponse);
+}
+
+message CreateContentRequest {
+  string title = 1;
+  string body = 2;
+}
+
+message CreateContentResponse {
+  content.v1.Content content = 1;
+}
+
+message UpdateContentRequest {
+  string id = 1;
+  string title = 2;
+  string body = 3;
+}
+
+message UpdateContentResponse {
+  content.v1.Content content = 1;
+}
+
+message DeleteContentRequest {
+  string id = 1;
+}
+
+message DeleteContentResponse {
+  content.v1.Content content = 1;
+}
+
+message GetContentRequest {
+  string id = 1;
+}
+
+message GetContentResponse {
+  content.v1.Content content = 1;
+}
+
+message ListContentsRequest {
+  int32 page_limit = 1;
+  int32 page_offset = 2;
+}
+
+message ListContentsResponse {
+  repeated content.v1.Content items = 1;
+  int32 total_count = 2;
+  int32 next_page_offset = 3;
+  bool has_more = 4;
+}

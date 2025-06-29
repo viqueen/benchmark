@@ -1,0 +1,4 @@
+.idea/
+*.iml
+
+api/go-sdk/**/*.go

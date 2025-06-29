@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option go_package = "api/go-sdk/content/v1;contentV1";
+
+package content.v1;
+
+message Content {
+  string id = 1;
+  string title = 2;
+  string body = 3;
+}
