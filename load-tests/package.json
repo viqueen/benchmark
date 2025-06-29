@@ -1,0 +1,6 @@
+{
+  "name": "@labset/benchmark-load-tests",
+  "version": "1.0.0",
+  "description": "k6 load tests for Labset Benchmark with Grafana visualization",
+  "scripts": {}
+}
