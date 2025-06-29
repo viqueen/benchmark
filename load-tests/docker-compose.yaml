@@ -43,8 +43,8 @@ services:
 
   api:
     build:
-      context: ../packages/${NAME}
-      dockerfile: Dockerfile
+      context: ..
+      dockerfile: packages/${NAME}/Dockerfile
     container_name: benchmark-api
     ports:
       - "8080:8080"
