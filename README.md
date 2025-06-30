@@ -56,6 +56,27 @@ make start-monitoring
 
 #### golang
 
+- smoke test
+
+```bash
+make smoke-tests NAME=go-basic
+```
+
+- load test
+
 ```bash
 make load-tests NAME=go-basic
 ```
+
+- stress test
+
+```bash
+make stress-tests NAME=go-basic 
+```
+
+
+#### view results in Grafana
+
+- Open http://localhost:3000
+- Login: admin/admin
+- Navigate to the k6 Load Testing Dashboard

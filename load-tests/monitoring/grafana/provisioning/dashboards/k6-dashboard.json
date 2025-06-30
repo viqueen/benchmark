@@ -1,0 +1,160 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "k6 Load Testing Dashboard",
+    "tags": ["k6", "load-testing"],
+    "timezone": "browser",
+    "panels": [
+      {
+        "id": 1,
+        "title": "Virtual Users",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "SELECT mean(\"value\") FROM \"vus\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
+            "intervalFactor": 1,
+            "refId": "A"
+          }
+        ],
+        "yAxes": [
+          {
+            "label": "Virtual Users",
+            "show": true
+          },
+          {
+            "show": true
+          }
+        ],
+        "xAxes": [
+          {
+            "show": true
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        }
+      },
+      {
+        "id": 2,
+        "title": "Response Time",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "SELECT percentile(\"value\", 95) FROM \"http_req_duration\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
+            "intervalFactor": 1,
+            "refId": "A",
+            "alias": "95th percentile"
+          },
+          {
+            "expr": "SELECT percentile(\"value\", 99) FROM \"http_req_duration\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
+            "intervalFactor": 1,
+            "refId": "B",
+            "alias": "99th percentile"
+          }
+        ],
+        "yAxes": [
+          {
+            "label": "Response Time (ms)",
+            "show": true
+          },
+          {
+            "show": true
+          }
+        ],
+        "xAxes": [
+          {
+            "show": true
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        }
+      },
+      {
+        "id": 3,
+        "title": "Request Rate",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "SELECT mean(\"value\") FROM \"http_reqs\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
+            "intervalFactor": 1,
+            "refId": "A"
+          }
+        ],
+        "yAxes": [
+          {
+            "label": "Requests/sec",
+            "show": true
+          },
+          {
+            "show": true
+          }
+        ],
+        "xAxes": [
+          {
+            "show": true
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 8
+        }
+      },
+      {
+        "id": 4,
+        "title": "Error Rate",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "SELECT mean(\"value\") FROM \"errors\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
+            "intervalFactor": 1,
+            "refId": "A"
+          }
+        ],
+        "yAxes": [
+          {
+            "label": "Error Rate",
+            "show": true
+          },
+          {
+            "show": true
+          }
+        ],
+        "xAxes": [
+          {
+            "show": true
+          }
+        ],
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 8
+        }
+      }
+    ],
+    "time": {
+      "from": "now-5m",
+      "to": "now"
+    },
+    "timepicker": {},
+    "templating": {
+      "list": []
+    },
+    "annotations": {
+      "list": []
+    },
+    "refresh": "5s",
+    "schemaVersion": 16,
+    "version": 0,
+    "links": []
+  }
+}

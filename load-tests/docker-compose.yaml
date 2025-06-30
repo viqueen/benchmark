@@ -18,7 +18,7 @@ services:
       - INFLUXDB_USER=k6
       - INFLUXDB_USER_PASSWORD=k6
     volumes:
-      - ./.local/influxdb:/var/lib/influxdb
+      - ../.local/influxdb:/var/lib/influxdb
     profiles:
       - monitoring
       - test
@@ -31,11 +31,11 @@ services:
     networks:
       - load-tests
     environment:
+      - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=admin
     volumes:
-      - ./.local/grafana:/var/lib/grafana
-      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards
-      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources
+      - ../.local/grafana:/var/lib/grafana
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning
     depends_on:
       - influxdb
     profiles:
@@ -58,7 +58,7 @@ services:
   k6:
     image: grafana/k6:latest
     container_name: k6
-    command: run --out influxdb=http://influxdb:8086/k6 /tests/content-api.js
+    command: run --out influxdb=http://influxdb:8086/k6 ${TARGET} /tests/content-api.js
     volumes:
       - ./tests:/tests
     networks:

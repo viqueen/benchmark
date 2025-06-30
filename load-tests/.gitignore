@@ -1,9 +1,6 @@
 # Local data volumes
 .local/
 
-# k6 output files
-*.html
-*.json
 
 # Node modules (if any)
 node_modules/
