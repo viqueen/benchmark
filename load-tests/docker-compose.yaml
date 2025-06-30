@@ -1,9 +1,9 @@
 version: '3.8'
 
 networks:
-  load-tests:
+  monitoring_network:
     driver: bridge
-    name: load-tests-network
+    name: monitoring_network
 
 services:
   influxdb:
@@ -12,7 +12,7 @@ services:
     ports:
       - "8086:8086"
     networks:
-      - load-tests
+      - monitoring_network
     environment:
       - INFLUXDB_DB=k6
       - INFLUXDB_USER=k6
@@ -24,15 +24,16 @@ services:
       - test
 
   grafana:
-    image: grafana/grafana:latest
+    image: grafana/grafana:11.4.0
     container_name: grafana
     ports:
       - "3000:3000"
     networks:
-      - load-tests
+      - monitoring_network
     environment:
       - GF_SECURITY_ADMIN_USER=admin
-      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_SECURITY_ADMIN_PASSWORD=secret
+      - GF_SECURITY_DISABLE_INITIAL_ADMIN_PASSWORD_CHANGE=true
     volumes:
       - ../.local/grafana:/var/lib/grafana
       - ./monitoring/grafana/provisioning:/etc/grafana/provisioning
@@ -40,6 +41,19 @@ services:
       - influxdb
     profiles:
       - monitoring
+
+  prometheus:
+    image: prom/prometheus:v3.1.0
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    networks:
+      - monitoring_network
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    volumes:
+      - ../.local-env/monitoring/prometheus:/etc/prometheus
+      - ./monitoring/prometheus/config.yml:/etc/prometheus/prometheus.yml
 
   api:
     build:
@@ -49,7 +63,7 @@ services:
     ports:
       - "8080:8080"
     networks:
-      - load-tests
+      - monitoring_network
     environment:
       - PORT=8080
     profiles:
@@ -62,7 +76,7 @@ services:
     volumes:
       - ./tests:/tests
     networks:
-      - load-tests
+      - monitoring_network
     environment:
       - API_BASE_URL=http://api:8080
       - K6_INFLUXDB_ADDR=http://influxdb:8086

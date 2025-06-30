@@ -78,5 +78,5 @@ make stress-tests NAME=go-basic
 #### view results in Grafana
 
 - Open http://localhost:3000
-- Login: admin/admin
-- Navigate to the k6 Load Testing Dashboard
+- Login: admin/secret
+- Navigate to the K6 Load Testing Dashboard
