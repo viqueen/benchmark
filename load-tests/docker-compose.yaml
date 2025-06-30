@@ -79,6 +79,7 @@ services:
       - monitoring_network
     environment:
       - API_BASE_URL=http://api:8080
+      - TARGET=${TARGET}
       - K6_INFLUXDB_ADDR=http://influxdb:8086
       - K6_INFLUXDB_DB=k6
     depends_on:

@@ -16,6 +16,9 @@ export const options = {
     http_req_duration: ['p(95)<2000'], // 95% of requests under 2s
     errors: ['rate<0.1'], // Error rate under 10%
   },
+  tags: {
+    target: __ENV.TARGET || 'default',
+  }
 };
 
 // Base URL - can be overridden with environment variable
