@@ -2,6 +2,8 @@
 *.iml
 
 api/go-sdk/**/*.go
+api/node-sdk/**/*.ts
 
+dist/
 node_modules/
 .local/

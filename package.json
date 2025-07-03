@@ -5,13 +5,19 @@
   "license": "Apache-2.0",
   "scripts": {
     "claude": "claude",
-    "k6": "npm run --workspace @labset/benchmark-load-tests"
+    "k6": "npm run --workspace @labset/benchmark-load-tests",
+    "build": "npm run build --workspaces"
   },
+  "private": true,
   "workspaces": [
-    "load-tests/*",
+    "api/node-sdk",
     "packages/*"
   ],
   "devDependencies": {
-    "@anthropic-ai/claude-code": "^1.0.35"
+    "@anthropic-ai/claude-code": "^1.0.35",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@bufbuild/protobuf": "^2.6.0"
   }
 }

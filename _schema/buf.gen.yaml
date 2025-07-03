@@ -10,6 +10,10 @@ plugins:
   - remote: buf.build/connectrpc/go
     out: ../api/go-sdk
     opt: paths=source_relative
+  # node-sdk
+  - remote: buf.build/bufbuild/es:v2.6.0
+    out: ../api/node-sdk/src
+    opt: target=ts
 
 inputs:
   - directory: protos
